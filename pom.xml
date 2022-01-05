@@ -80,7 +80,10 @@
 		</dependency>
 
 	</dependencies>
-
+	<properties>
+		<sonar.organization>antoinebouard-1</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	</properties>
 	<build>
 		<plugins>
 			<plugin>
