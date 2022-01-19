@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.gauge</groupId>
 			<artifactId>gauge-java</artifactId>
-			<version>0.7.2</version>
+			<version>0.7.15</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -79,6 +79,12 @@
 			<artifactId>cucumber-junit</artifactId>
 			<version>5.3.0</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.gauge</groupId>
+			<artifactId>gauge-java</artifactId>
+			<version>0.7.2</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>
