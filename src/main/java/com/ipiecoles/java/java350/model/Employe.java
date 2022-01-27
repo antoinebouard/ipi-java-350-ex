@@ -65,19 +65,33 @@ public class Employe {
         return getNbRtt(LocalDate.now());
     }
 
-    public Integer getNbRtt(LocalDate d){
-        int i1 = d.isLeapYear() ? 365 : 366;int var = 104;
-        switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
-        case THURSDAY: if(d.isLeapYear()) var =  var + 1; break;
-        case FRIDAY:
-        if(d.isLeapYear()) var =  var + 2;
-        else var =  var + 1;
-case SATURDAY:var = var + 1;
-                    break;
+    public Integer getNbRtt(LocalDate year){
+        // Variable
+        boolean isLeapYear = year.isLeapYear();
+        int nbYearDay = isLeapYear ? 366 : 365;
+        int nbWeekendDay = 104;
+        // Calcul du nombre de jours week end suivant le premier jour de l'année
+        switch (LocalDate.of(year.getYear(), 1, 1).getDayOfWeek()) {
+            case THURSDAY:
+                if (isLeapYear)
+                    nbWeekendDay += 1;
+                break;
+            case FRIDAY:
+                if (isLeapYear)
+                    nbWeekendDay += 2;
+                else
+                    nbWeekendDay += 1;
+                break;
+            case SATURDAY:
+                nbWeekendDay += 1;
+                break;
+            default:
+                break;
         }
-        int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate ->
-                localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-        return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+        // Récupère le nombre de jours féries travaillé et donne le nb de jours RTT en prenant en compte le temps partiel
+        int nbPublicHolydayNoWeekEnd = (int) Entreprise.joursFeries(year).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
+        int nbRTT = nbYearDay - Entreprise.NB_JOURS_MAX_FORFAIT - nbWeekendDay - Entreprise.NB_CONGES_BASE - nbPublicHolydayNoWeekEnd;
+        return (int) Math.ceil(nbRTT * tempsPartiel);
     }
 
     /**
