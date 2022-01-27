@@ -83,4 +83,82 @@ class EmployeTest {
         // Prime de base + prime de perf + prime d'ancienneté au pro rata de son activité
         Assertions.assertEquals(prime, primeAttendue);
     }
+
+    @Test
+    void testAugmenterSalaireWithPourcentagePositif() {
+        //Given
+        Employe e = new Employe();
+        e.setSalaire(1300D);
+
+        //When
+        e.augmenterSalaire(10);
+
+        //Then
+        Assertions.assertEquals(1430, e.getSalaire());
+    }
+
+    @Test
+    void testAugmenterSalaireWithPourcentageNegatif() {
+        //Given
+        Employe e = new Employe();
+        e.setSalaire(1300D);
+
+        //When
+        e.augmenterSalaire(-10);
+
+        //Then
+        Assertions.assertEquals(1300, e.getSalaire());
+    }
+
+    @Test
+    void testAugmenterSalaireWithPourcentage0() {
+        //Given
+        Employe e = new Employe();
+        e.setSalaire(1300D);
+
+        //When
+        e.augmenterSalaire(0);
+
+        //Then
+        Assertions.assertEquals(1300, e.getSalaire());
+    }
+
+    @Test
+    void testAugmenterSalaireWithSalaireNull() {
+        //Given
+        Employe e = new Employe();
+        e.setSalaire(null);
+
+        //When
+        e.augmenterSalaire(10);
+
+        //Then
+        Assertions.assertEquals(0, e.getSalaire());
+    }
+
+    @Test
+    void testAugmenterSalaireWithSalaireNegatif() {
+        //Given
+        Employe e = new Employe();
+        e.setSalaire(-100D);
+
+        //When
+        e.augmenterSalaire(10);
+
+        //Then
+        Assertions.assertEquals(0, e.getSalaire());
+    }
+
+    @Test
+    void testAugmenterSalaireWithSalaireNegatifAndPourcentageNegatif() {
+        //Given
+        Employe e = new Employe();
+        e.setSalaire(-100D);
+
+        //When
+        e.augmenterSalaire(-10);
+
+        //Then
+        Assertions.assertEquals(0, e.getSalaire());
+    }
 }
