@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -57,5 +59,34 @@ public class EmployeServiceIntegrationTest {
         //1521.22 * 1.2 * 1.0
         Assertions.assertEquals(1825.464, employe.getSalaire().doubleValue());
     }
+
+    @ParameterizedTest(name = "caTraite de {1} et un caObjectif de {2} la performance attendu est {5}")
+    @CsvSource({
+            "'C12345',      9000,       10000,          5,              3",
+            "'C12345',      1000,       1000,           30,             30",
+            "'C12345',      12000,      10000,          50,             52",
+            "'C12345',      14000,      10000,          10,             15",
+    })
+    void testCalculPerformanceCommercial(String matricule, Long caTraite, Long objectifCa, Integer perf, Integer perfAttendu) throws EmployeException{
+        //Given
+
+        Employe employe = new Employe();
+        employe.setNom("Doe");
+        employe.setPrenom("Jhon");
+        employe.setSalaire(2000.00);
+        employe.setMatricule(matricule);
+        employe.setDateEmbauche(LocalDate.now());
+        employe.setPerformance(perf);
+
+        employeRepository.save(employe);
+
+        //When
+        employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+        employe = this.employeRepository.findByMatricule(matricule);
+
+        //Then
+        Assertions.assertEquals(employe.getPerformance(), perfAttendu);
+    }
+
 
 }
