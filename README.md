@@ -12,17 +12,6 @@
 ![Sécurité](https://sonarcloud.io/api/project_badges/measure?project=antoinebouard_ipi-java-350-ex&branch=master&metric=security_rating)
 ![Vulnerabilité](https://sonarcloud.io/api/project_badges/measure?project=antoinebouard_ipi-java-350-ex&branch=master&metric=vulnerabilities)
 ![Dette technique](https://sonarcloud.io/api/project_badges/measure?project=antoinebouard_ipi-java-350-ex&branch=master&metric=sqale_index)
-
-
-coverage
-duplicated_lines_density
-ncloc
-sqale_rating
-alert_status
-reliability_rating
-security_rating
-sqale_index
-vulnerabilities
 # TP sur la qualité logicielle
 
 Exercices de Java, module 350 pour l'IPI. Il est nécessaire de forker ce repository pour pouvoir faire tout le TP !! Après chaque question, pusher vos modifications sur votre repository.
