@@ -134,7 +134,7 @@ public class Employe {
         if (salaire == null || salaire <= 0) {
             salaire = 0d;
         }
-        if (salaire != null && salaire > 0 && pourcentage > 0) {
+        if (salaire > 0 && pourcentage > 0) {
             salaire=Math.round(salaire * (1 + pourcentage/100)*100.0) / 100.0;
         }
 
