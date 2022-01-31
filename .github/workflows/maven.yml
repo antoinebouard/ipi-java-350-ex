@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - eval-antoine
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
